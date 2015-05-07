@@ -1,0 +1,7 @@
+/build
+
+src/debug
+src/androidTest
+pruebaGoogleLocation.apk
+app-debug.apk
+proguard-rules.pro

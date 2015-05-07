@@ -1,0 +1,13 @@
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+
+app/src/androidTest
+app/src/debug
+app/pruebaGoogleLocation.apk
+app/app-debug.apk
+app/proguard-rules.pro
