@@ -12,7 +12,7 @@ public class Utils {
 
     public static String dateFormatter(Date date){
 
-        long dif = obtenerDiasDeDiferencia(date);
+        long dif = daysBetween(date);
 
         if(dif>=1){
 
@@ -53,7 +53,7 @@ public class Utils {
 
     }
 
-    private static long obtenerDiasDeDiferencia(Date date){
+    private static long daysBetween(Date date){
 
         Calendar currentDate = Calendar.getInstance();
 

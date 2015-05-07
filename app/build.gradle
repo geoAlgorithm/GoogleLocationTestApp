@@ -13,8 +13,9 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFile 'C:/Users/Usuario/Documents/Android Studio/GoogleLocationTestApp2/app/proguard-rules.pro'
         }
     }
 }
