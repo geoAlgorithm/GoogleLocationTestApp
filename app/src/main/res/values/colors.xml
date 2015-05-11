@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="electric_blue">#427fed</color>
+    <color name="highlight_blue">#2d508e</color>
+    <color name="highlight_gray">#bbbbbb</color>
+    <color name="row_gray">#eeeeee</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+</resources>

@@ -83,7 +83,7 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1*60*1000);
         mLocationRequest.setSmallestDisplacement(15);
-        mLocationRequest.setFastestInterval(1*60*1000);
+        mLocationRequest.setFastestInterval(1 * 60 * 1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
     }
 
@@ -98,31 +98,35 @@ public class LocationService extends Service implements GoogleApiClient.Connecti
     @Override
     public void onLocationChanged(Location location) {
 
-        List<Location> mLocations = new ArrayList<>();
+        if(location.getAccuracy()<100) {
 
-        SharedPreferences prefs = getSharedPreferences("GooglePlayMapsTest", Context.MODE_PRIVATE);
-        String locationJson = prefs.getString("locationJson", "");
+            List<Location> mLocations = new ArrayList<>();
 
-        if (!locationJson.equals("")) {
+            SharedPreferences prefs = getSharedPreferences("GooglePlayMapsTest", Context.MODE_PRIVATE);
+            String locationJson = prefs.getString("locationJson", "");
 
-            Gson gson = new Gson();
-            mLocations = gson.fromJson(locationJson, new TypeToken<ArrayList<Location>>() {}.getType());
+            if (!locationJson.equals("")) {
+
+                Gson gson = new Gson();
+                mLocations = gson.fromJson(locationJson, new TypeToken<ArrayList<Location>>() {
+                }.getType());
+
+            }
+
+            mLocations.add(location);
+
+            Gson gson = new GsonBuilder().create();
+
+            locationJson = gson.toJson(mLocations, new TypeToken<List<Location>>() {
+            }.getType());
+
+            SharedPreferences.Editor editor = getSharedPreferences("GooglePlayMapsTest", Context.MODE_PRIVATE).edit();
+
+            editor.putString("locationJson", locationJson).commit();
+
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(MapsActivity.NEW_LOCATION_RECEIVED));
 
         }
-
-        mLocations.add(location);
-
-        Gson gson = new GsonBuilder().create();
-
-        locationJson = gson.toJson(mLocations, new TypeToken<List<Location>>() {
-        }.getType());
-
-        SharedPreferences.Editor editor = getSharedPreferences("GooglePlayMapsTest", Context.MODE_PRIVATE).edit();
-
-        editor.putString("locationJson", locationJson).commit();
-
-        LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent(MapsActivity.NEW_LOCATION_RECEIVED));
-
     }
 
     protected void startLocationUpdates() {

@@ -83,6 +83,11 @@ public class MapsActivity extends FragmentActivity {
         if(lastMarker != null)
             lastMarker.hideInfoWindow();
 
+        if(adapter != null) {
+            adapter.setSelectedRow(position);
+            adapter.notifyDataSetChanged();
+        }
+
         lastMarker = mMarkers.get(position);
 
         lastMarker.showInfoWindow();
